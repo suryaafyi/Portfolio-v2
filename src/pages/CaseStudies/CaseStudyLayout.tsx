@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { SidebarTOC, TOCSection } from '../../components/CaseStudy/SidebarTOC';
 import { TagChip } from '../../components/CaseStudy/UIComponents';
-
 interface CaseStudyLayoutProps {
   tags: string[];
   headline: string;
@@ -77,7 +76,9 @@ export const CaseStudyLayout = ({
 
       {/* Two Column Layout */}
       <div className="max-w-[1200px] mx-auto flex flex-col lg:flex-row gap-16 lg:gap-32 relative items-start">
-        <SidebarTOC sections={tocSections} />
+        <div className="w-full lg:w-64 flex-shrink-0 flex flex-col">
+          <SidebarTOC sections={tocSections} />
+        </div>
         
         {/* Main Content Area */}
         <div className="flex-1 max-w-[800px] w-full">

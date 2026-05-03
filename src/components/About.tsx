@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import OriginStory from './About/OriginStory';
+import AboutHeroImage from './About/AboutHeroImage';
 import WhyWorkWithMe from './About/WhyWorkWithMe';
 import BeyondTheScreen from './About/BeyondTheScreen';
 import FavoriteThings from './About/FavoriteThings';
@@ -57,6 +58,7 @@ const InlineImage = ({ imageUrl, className = '' }: { imageUrl?: string; classNam
 const About = () => {
   return (
     <section id="about" className="relative bg-bg-primary">
+      {/* <AboutHeroImage /> */}
       {/* ── Hero text ─────────────────────────────── */}
       <div className="container mx-auto px-6 pt-32 pb-64">
         <div className="max-w-6xl mx-auto space-y-16">

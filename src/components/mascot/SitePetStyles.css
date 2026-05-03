@@ -1,0 +1,513 @@
+.site-pet {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 9999;
+  pointer-events: none;
+  --pet-x: 40px;
+  --pet-y: 0px;
+  --pet-ground: 0px;
+  --pet-flip: 1;
+  transform: translate3d(var(--pet-x), calc((var(--pet-y) + var(--pet-ground)) * -1), 0);
+  will-change: transform;
+}
+.site-pet__hit {
+  display: block;
+  position: relative;
+  /* Extra hit slop so taps don't miss and pass through to cards below */
+  padding: 12px;
+  margin: -12px;
+  border: 0;
+  background: transparent;
+  cursor: grab;
+  pointer-events: auto;
+  transform: scaleX(var(--pet-flip));
+  transform-origin: 50% 50%;
+  transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+  touch-action: none;
+}
+.site-pet[data-dragging] .site-pet__hit {
+  cursor: grabbing;
+}
+.site-pet[data-on-clickable] .site-pet__hit {
+  padding: 20px;
+  margin: -20px;
+}
+.site-pet__svg {
+  display: block;
+  /* Hats extend above the body's viewBox; allow that overflow. */
+  overflow: visible;
+}
+
+/* Hats — each variant is drawn inline; CSS reveals only the selected one. */
+.pet-hat {
+  display: none;
+}
+.site-pet[data-hat="bucket"] .pet-hat[data-hat-variant="bucket"],
+.site-pet[data-hat="top"] .pet-hat[data-hat-variant="top"],
+.site-pet[data-hat="cap"] .pet-hat[data-hat-variant="cap"],
+.site-pet[data-hat="sprout"] .pet-hat[data-hat-variant="sprout"],
+.site-pet[data-hat="party"] .pet-hat[data-hat-variant="party"] {
+  display: block;
+}
+
+/* Whole-body idle bob — disabled while hopping or being dragged. */
+.site-pet__bob {
+  display: block;
+  animation: site-pet-bob 0.5s ease-in-out infinite;
+}
+@keyframes site-pet-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-1.5px);
+  }
+}
+
+/* Walk cycle — legs alternate in a crisp 2-step cadence. */
+.site-pet__leg {
+  transform-origin: 50% 100%;
+  animation: site-pet-leg 0.46s steps(2, end) infinite;
+}
+.site-pet__leg--right {
+  animation-delay: 0.23s;
+}
+@keyframes site-pet-leg {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* Blink. */
+.site-pet__eye {
+  transform-origin: 50% 50%;
+  transition: transform 120ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.site-pet[data-blink] .site-pet__eye {
+  transform: scaleY(0.15);
+}
+
+/* Pause walking when hovered. (Drag has its own leg animation, below.) */
+.site-pet[data-paused]:not([data-dragging]) .site-pet__leg,
+.site-pet[data-paused]:not([data-dragging]) .site-pet__bob {
+  animation-play-state: paused;
+}
+
+/* Dragged: legs kick and flail as the pet is hoisted into the air. */
+.site-pet[data-dragging] .site-pet__bob {
+  animation: none;
+}
+.site-pet[data-dragging] .site-pet__leg {
+  animation: site-pet-leg-kick 0.26s ease-in-out infinite;
+  transform-origin: 50% 0%;
+}
+.site-pet[data-dragging] .site-pet__leg--right {
+  animation-delay: 0.13s;
+}
+@keyframes site-pet-leg-kick {
+  0% {
+    transform: translateY(1px) rotate(-16deg);
+  }
+  50% {
+    transform: translateY(-1px) rotate(14deg);
+  }
+  100% {
+    transform: translateY(1px) rotate(-16deg);
+  }
+}
+
+/* Shadow shrinks while airborne (dragged or hopping) so the pet reads as
+    lifted off the ground. */
+.site-pet__shadow {
+  transition:
+    opacity 180ms ease-out,
+    transform 180ms ease-out;
+  transform-origin: 22px 53.5px;
+}
+.site-pet[data-dragging] .site-pet__shadow {
+  opacity: 0.08;
+  transform: scale(0.7);
+}
+
+/* Lean on bump — quick squash + rotate when hitting a wall. */
+.site-pet[data-bump] .site-pet__bob {
+  animation: site-pet-bump 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes site-pet-bump {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  30% {
+    transform: translateX(calc(var(--pet-bump-dir, 1) * 3px))
+      rotate(calc(var(--pet-bump-dir, 1) * -6deg));
+  }
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+}
+
+/* Hop on click. */
+.site-pet[data-hopping] .site-pet__bob {
+  animation: site-pet-hop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes site-pet-hop {
+  0% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-18px) rotate(-6deg);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Dizzy — shaken hard while being dragged. Pet holds still, eyes swirl,
+    little sparks orbit, speech reads "whoaa....". */
+.site-pet[data-dizzy] .site-pet__bob {
+  animation: site-pet-dizzy-sway 0.6s ease-in-out infinite;
+}
+.site-pet[data-dizzy] .site-pet__eyes {
+  animation: site-pet-dizzy-eyes 0.9s linear infinite;
+  transform-origin: 22px 25px;
+}
+.site-pet[data-dizzy] .site-pet__leg {
+  animation-play-state: paused;
+}
+@keyframes site-pet-dizzy-sway {
+  0%,
+  100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+@keyframes site-pet-dizzy-eyes {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Orbiting dizzy stars layered above the pet. */
+.site-pet-spin-star {
+  position: absolute;
+  left: 50%;
+  top: 4px;
+  width: 4px;
+  height: 4px;
+  border-radius: 9999px;
+  background: #f0ede8;
+  box-shadow: 0 0 4px rgba(240, 237, 232, 0.65);
+  transform: translate(-50%, -50%);
+  animation: site-pet-spin-star 0.9s linear infinite;
+}
+@keyframes site-pet-spin-star {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg) translateX(18px) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg) translateX(18px) rotate(-360deg);
+  }
+}
+
+/*
+  Swirl trails — rendered every time the pet is shaken, before dizzy
+  fully kicks in. Open-ring SVGs spiral upward and fade, giving
+  immediate visual feedback that shaking means something.
+*/
+.site-pet-swirl {
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  color: #f0ede8;
+  animation: site-pet-swirl 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.site-pet-swirl svg {
+  display: block;
+}
+@keyframes site-pet-swirl {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(0deg) scale(0.5);
+  }
+  30% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--swirl-dx, 0px)), calc(-50% - 34px)) rotate(540deg)
+      scale(1.15);
+  }
+}
+
+/* Emote layer — a single discreet ink dot rises from the head on click. */
+.site-pet__emotes {
+  position: absolute;
+  left: 50%;
+  top: 2px;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+.site-pet-emote {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background: #1a1a1a;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation: site-pet-emote 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes site-pet-emote {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.4);
+  }
+  25% {
+    opacity: 0.75;
+    transform: translate(calc(-50% + var(--emote-dx, 0px)), calc(-50% - 10px)) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--emote-dx, 0px) * 1.4), calc(-50% - 28px)) scale(0.7);
+  }
+}
+
+/* Speech bubble — anchored well above the sprite so it never overlaps
+    the head (especially while a hat is on). */
+.site-pet__bubble {
+  position: absolute;
+  left: 22px; /* half the sprite width */
+  bottom: calc(100% + 14px);
+  transform: translate(-50%, 0) translateY(4px);
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: rgba(26, 26, 26, 0.88);
+  color: #f0ede8;
+  font-family: var(--font-mono, "Space Mono", monospace);
+  font-size: 11px;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition:
+    opacity 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-shadow: 0 6px 14px -6px rgba(0, 0, 0, 0.4);
+}
+.site-pet__bubble[data-show] {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+/* Raise bubble when wearing a hat so it clears the headwear */
+.site-pet[data-hat="bucket"] .site-pet__bubble,
+.site-pet[data-hat="top"] .site-pet__bubble,
+.site-pet[data-hat="cap"] .site-pet__bubble,
+.site-pet[data-hat="sprout"] .site-pet__bubble,
+.site-pet[data-hat="party"] .site-pet__bubble {
+  bottom: calc(100% + 26px);
+}
+/*
+  Bubble tail — a downward CSS triangle sitting flush below the bubble.
+  Using borders instead of a rotated square means the tail never
+  overlaps the bubble, so the translucent fill doesn't double up into
+  a visible diamond through the bubble body.
+*/
+.site-pet__bubble::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 0;
+  height: 0;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: rgba(26, 26, 26, 0.88);
+  border-bottom: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-pet__bob,
+  .site-pet__leg {
+    animation: none;
+  }
+}
+
+/* ============ Hat rack ============
+    Positioned by JS to sit on top of the sidebar's "Explore" nav —
+    `--rack-x` / `--rack-y` are the left/top anchors in viewport coords.
+*/
+/*
+  Rack is fixed-positioned so it tracks the sticky sidebar.
+  JS sets --rack-x / --rack-y in viewport coordinates.
+*/
+.hat-rack {
+  position: fixed;
+  left: var(--rack-x, 40px);
+  top: var(--rack-y, 40px);
+  z-index: 9999;
+  pointer-events: none;
+}
+/*
+  Toggle — transparent chip, the SVG is the sole visible element.
+  Fixed inline-block sized to the sprite so the stem base always lands
+  on the toggle's bottom edge (deterministic across browsers + zoom
+  levels). ::before extends the hit area without changing layout.
+*/
+.hat-rack__toggle {
+  all: unset;
+  display: inline-block;
+  position: relative;
+  width: 26px;
+  height: 22px;
+  cursor: pointer;
+  pointer-events: auto;
+  transform-origin: 50% 100%;
+  filter: drop-shadow(0 2px 3px rgba(36, 36, 36, 0.28));
+  transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hat-rack__toggle::before {
+  content: "";
+  position: absolute;
+  inset: -14px -18px;
+}
+/*
+  Invisible hover-bridge fanning out below the toggle so users can
+  safely move diagonally toward a menu option without the hover
+  state dropping mid-path. Wider than the menu, short enough that it
+  doesn't sit over page content when the rack is collapsed.
+*/
+.hat-rack__toggle::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 220px;
+  height: 26px;
+  transform: translateX(-50%);
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  pointer-events: auto;
+}
+.hat-rack__toggle:hover {
+  transform: translateY(-2px) scale(1.06);
+}
+.hat-rack__toggle svg {
+  display: block;
+}
+/*
+  When a hat is selected, hide the default sprout-stand icon and show
+  the worn hat in the preview slot — bottom-aligned to the toggle so
+  the hat's brim sits flush on the Explore nav's top edge, no gap.
+*/
+.hat-rack__preview-slot {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  display: none;
+  pointer-events: none;
+}
+.hat-rack__preview-slot svg {
+  display: block;
+}
+.hat-rack[data-has-hat] .hat-rack__icon--default {
+  display: none;
+}
+.hat-rack[data-has-hat] .hat-rack__preview-slot {
+  display: block;
+}
+
+/* Floating menu panel — pops down from the toggle on click. */
+.hat-rack__menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px) scale(0.95);
+  display: flex;
+  gap: 4px;
+  padding: 6px;
+  border-radius: 10px;
+  background: rgba(26, 26, 26, 0.88);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 10px 22px -10px rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  white-space: nowrap;
+}
+.hat-rack:hover:not([data-hat-picked]) .hat-rack__menu,
+.hat-rack:focus-within .hat-rack__menu,
+.hat-rack[data-open] .hat-rack__menu {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.hat-rack__opt {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 30px;
+  padding: 0 3px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    background 160ms ease-out,
+    transform 180ms var(--ease-out-soft);
+  color: #f0ede8;
+}
+.hat-rack__opt:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+.hat-rack__opt svg {
+  display: block;
+}
+.hat-rack__opt[data-selected] {
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 0 0 1px rgba(240, 237, 232, 0.6);
+}
+.hat-rack__none {
+  font-family: var(--font-mono, monospace);
+  font-size: 16px;
+  color: #f0ede8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hat-rack__toggle,
+  .hat-rack__menu,
+  .hat-rack__opt {
+    transition: opacity 120ms ease-out;
+    transform: none;
+  }
+  .hat-rack[data-open] .hat-rack__menu {
+    transform: translateX(-50%);
+  }
+}

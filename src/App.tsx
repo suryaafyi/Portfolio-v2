@@ -11,7 +11,8 @@ import Home from './pages/Home';
 import { ShiftCaseStudy } from './pages/CaseStudies/Shift';
 import { KnotCaseStudy } from './pages/CaseStudies/Knot';
 import { ZenDoCaseStudy } from './pages/CaseStudies/ZenDo';
-
+import { SitePet } from './components/mascot/SitePet';
+import { HatRack } from './components/mascot/HatRack';
 function App() {
   const [showSplash, setShowSplash] = useState(false);
   const [splashDonePhase, setSplashDonePhase] = useState(false);
@@ -121,7 +122,12 @@ function AppContent({
           <Route path="/work/knot" element={<KnotCaseStudy />} />
           <Route path="/work/zendo" element={<ZenDoCaseStudy />} />
         </Routes>
+        
+        {/* Global Persistent Mascot and Hat Rack */}
+        <SitePet />
+        <HatRack />
       </div>
+
 
       {/* Vercel Web Analytics */}
       <Analytics />

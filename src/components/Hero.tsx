@@ -29,7 +29,7 @@ const ScrambleText = ({ text, startAnimation = true }: { text: string, startAnim
 
 const Hero = ({ splashDonePhase = true }: { splashDonePhase?: boolean }) => {
   return (
-    <section className="relative min-h-screen flex flex-col justify-center pt-32 pb-16 overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex flex-col justify-center pt-32 pb-16 overflow-hidden">
       {/* Floating Doodles */}
       <motion.div
         animate={{
@@ -179,6 +179,7 @@ const Hero = ({ splashDonePhase = true }: { splashDonePhase?: boolean }) => {
           </a>
         </motion.div>
       </div>
+
 
       {/* Marquee Ticker */}
       <div className="w-full overflow-hidden bg-bg-secondary py-6 border-y border-black/5">
