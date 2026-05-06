@@ -11,6 +11,7 @@ import Home from './pages/Home';
 import { ShiftCaseStudy } from './pages/CaseStudies/Shift';
 import { KnotCaseStudy } from './pages/CaseStudies/Knot';
 import { ZenDoCaseStudy } from './pages/CaseStudies/ZenDo';
+import { WaaahCaseStudy } from './pages/CaseStudies/Waaah';
 import { SitePet } from './components/mascot/SitePet';
 import { HatRack } from './components/mascot/HatRack';
 function App() {
@@ -121,6 +122,7 @@ function AppContent({
           <Route path="/work/shift" element={<ShiftCaseStudy />} />
           <Route path="/work/knot" element={<KnotCaseStudy />} />
           <Route path="/work/zendo" element={<ZenDoCaseStudy />} />
+          <Route path="/work/waaah" element={<WaaahCaseStudy />} />
         </Routes>
         
         {/* Global Persistent Mascot and Hat Rack */}

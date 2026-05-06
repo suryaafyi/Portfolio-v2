@@ -229,7 +229,8 @@ const OriginStory = () => {
 
         {/* Cell 3: Stats Row (Below body on desktop, bottom on mobile) */}
         <div className="w-full max-w-[540px] flex flex-row flex-wrap md:flex-nowrap items-start justify-between border-t border-[#1a1a1a]/12 pt-4 md:border-t-0 md:pt-0 mt-[16px] md:mt-[64px] md:col-start-1 md:row-start-2">
-          <AnimatedStat endVal={3} label="case studies" isAccent={true} />
+          <AnimatedStat endVal={4} label="case studies" isAccent={true} />
+          <AnimatedStat endVal={1} label="product shipped" isAccent={true} />
           <AnimatedStat endVal={2.6} isFloat={true} label="yrs engineering" />
           <AnimatedStat endVal={0} label="unrealistic specs" />
         </div>

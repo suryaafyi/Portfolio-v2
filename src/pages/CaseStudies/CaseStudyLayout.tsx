@@ -75,10 +75,10 @@ export const CaseStudyLayout = ({
       </div>
 
       {/* Two Column Layout */}
-      <div className="max-w-[1200px] mx-auto flex flex-col lg:flex-row gap-16 lg:gap-32 relative items-start">
-        <div className="w-full lg:w-64 flex-shrink-0 flex flex-col">
+      <div className="max-w-[1200px] mx-auto flex flex-col lg:flex-row gap-16 lg:gap-32 relative">
+        <aside className="w-full lg:w-64 flex-shrink-0 lg:sticky lg:top-32 h-fit hidden lg:block">
           <SidebarTOC sections={tocSections} />
-        </div>
+        </aside>
         
         {/* Main Content Area */}
         <div className="flex-1 max-w-[800px] w-full">

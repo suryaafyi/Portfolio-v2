@@ -33,7 +33,7 @@ export const ShiftCaseStudy = () => {
         <MetadataBar
           role="UI/UX Designer (100%)"
           team="Solo Project"
-          timeline="2025"
+          timeline="3 weeks"
           skills="UX Research, Interaction Design, Visual Design, Prototyping"
         />
       }
@@ -169,10 +169,10 @@ export const ShiftCaseStudy = () => {
         <p>This project taught me that career transition tools need to prioritize emotional confidence as much as functional utility. The biggest lesson — fragmentation isn't just a UX problem, it's an emotional one. Users don't just need tools consolidated; they need to feel guided.</p>
       </SectionBlock>
 
-      <NextProjectFooter 
-        link="/work/knot" 
-        title="Knot" 
-        behanceLink="https://www.behance.net/gallery/245704505/Shift-A-Career-Transition-Platform-UX-Case-Study" 
+      <NextProjectFooter
+        link="/work/knot"
+        title="Knot"
+        behanceLink="https://www.behance.net/gallery/245704505/Shift-A-Career-Transition-Platform-UX-Case-Study"
       />
     </CaseStudyLayout>
   );

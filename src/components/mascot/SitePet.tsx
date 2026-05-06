@@ -6,7 +6,7 @@ export const SitePet = () => {
   const { petRef } = useSitePet();
 
   return (
-    <div ref={petRef as any} data-site-pet aria-hidden="true" className="site-pet">
+    <div ref={petRef as any} data-site-pet aria-hidden="true" className="site-pet" data-cursor="grab">
       <div className="site-pet__bubble" data-pet-bubble aria-hidden="true"></div>
       <div className="site-pet__emotes" data-pet-emotes aria-hidden="true"></div>
       <button

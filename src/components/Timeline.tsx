@@ -15,7 +15,7 @@ const milestones = [
   {
     year: "📍 2025",
     title: "Picked up Figma. Never put it down.",
-    description: "Started learning product design. Completed UI/UX course from HCL GUVI, 3 case studies in 6 months."
+    description: "Started learning product design. Completed UI/UX course from HCL GUVI, 4 case studies in 6 months."
   },
   {
     year: "📍 2026",

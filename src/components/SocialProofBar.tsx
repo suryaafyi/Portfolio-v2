@@ -3,7 +3,8 @@ import { motion } from 'framer-motion';
 
 const SocialProofBar = () => {
   const stats = [
-    "3 Case Studies",
+    "4 Case Studies",
+    "1 Product Shipped",
     "2.6 Yrs Engineering",
     "Available Now",
     "Chennai → Anywhere"

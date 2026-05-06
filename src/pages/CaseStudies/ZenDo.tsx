@@ -34,7 +34,7 @@ export const ZenDoCaseStudy = () => {
         <MetadataBar
           role="UI/UX Designer (100%)"
           team="Solo Project"
-          timeline="2025"
+          timeline="3 Weeks"
           skills="UX Research, Interaction Design, Motion Design, Usability Testing"
         />
       }
@@ -204,10 +204,10 @@ export const ZenDoCaseStudy = () => {
         </div>
       </SectionBlock>
 
-      <NextProjectFooter 
-        link="/" 
-        title="Back to Home" 
-        behanceLink="https://www.behance.net/gallery/246285297/Zen-do-A-Mindful-Productivity-App-UIUX-Case-Study" 
+      <NextProjectFooter
+        link="/"
+        title="Back to Home"
+        behanceLink="https://www.behance.net/gallery/246285297/Zen-do-A-Mindful-Productivity-App-UIUX-Case-Study"
       />
     </CaseStudyLayout>
   );

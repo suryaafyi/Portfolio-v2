@@ -3,7 +3,7 @@ import { motion, useSpring, useMotionValue } from 'framer-motion';
 
 const CustomCursor = () => {
   const [isDesktop, setIsDesktop] = useState(false);
-  const [hoverState, setHoverState] = useState<'default' | 'hover' | 'view'>('default');
+  const [hoverState, setHoverState] = useState<'default' | 'hover' | 'view' | 'hidden'>('default');
   
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -31,6 +31,8 @@ const CustomCursor = () => {
         setHoverState('hover');
       } else if (target.closest('[data-cursor="view"]')) {
         setHoverState('view');
+      } else if (target.closest('[data-cursor="default"]') || target.closest('.allow-cursor') || target.closest('[data-cursor="grab"]') || target.closest('[data-cursor="grabbing"]')) {
+        setHoverState('hidden');
       } else {
         setHoverState('default');
       }
@@ -67,7 +69,7 @@ const CustomCursor = () => {
       {/* Main Cursor Dot */}
       <motion.div
         className={`fixed top-0 left-0 w-4 h-4 rounded-full pointer-events-none z-[9999] flex items-center justify-center transition-colors duration-300 ${
-          hoverState !== 'default' ? 'bg-white mix-blend-difference' : 'bg-[#e8432d]'
+          hoverState === 'hidden' ? 'opacity-0' : hoverState !== 'default' ? 'bg-white mix-blend-difference' : 'bg-[#e8432d]'
         }`}
         style={{
           x: cursorX,

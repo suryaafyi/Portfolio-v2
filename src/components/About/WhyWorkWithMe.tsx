@@ -17,7 +17,7 @@ const cards = [
   {
     id: "03",
     title: "FAST EXECUTOR",
-    body: "I move fast without breaking things. 3 case studies from scratch in under a year — research, design, prototype, test. Full cycle, no hand-holding required.",
+    body: "I move fast without breaking things. 4 case studies from scratch in under a year — research, design, prototype, test. Full cycle, no hand-holding required.",
     annotation: "→ ships at 2am. literally~"
   },
   {
@@ -47,7 +47,7 @@ const WhyWorkWithMe = () => {
   };
 
   return (
-    <section 
+    <section
       id="why-work-with-me"
       ref={sectionRef}
       className="relative w-full bg-[#f0ede8] overflow-hidden min-h-[100vh] px-[24px] py-[80px] md:px-[6vw] md:py-[120px]"
@@ -66,7 +66,7 @@ const WhyWorkWithMe = () => {
       `}</style>
 
       {/* BACKGROUND GHOST TEXT */}
-      <div 
+      <div
         className="absolute top-[8%] left-[-2%] pointer-events-none select-none z-0 whitespace-nowrap text-[#1a1a1a]/[0.03]"
         style={{ fontFamily: 'Bebas Neue', fontSize: '32vw' }}
       >
@@ -75,7 +75,7 @@ const WhyWorkWithMe = () => {
 
       <div className="relative z-10 w-full max-w-[1400px] mx-auto">
         {/* SECTION LABEL */}
-        <div 
+        <div
           className="text-[#1a1a1a]/40 uppercase tracking-[0.2em] text-[11px] mb-[48px]"
           style={{ fontFamily: 'Space Mono' }}
         >
@@ -84,7 +84,7 @@ const WhyWorkWithMe = () => {
 
         {/* HEADLINE BLOCK */}
         <div className="relative block">
-          <motion.span 
+          <motion.span
             className="block text-[#1a1a1a] uppercase leading-[0.85] text-[clamp(56px,9vw,110px)] tracking-[-0.02em] relative z-10"
             style={{ fontFamily: 'Barlow Condensed', fontWeight: 900 }}
             initial={{ opacity: 0, y: 30 }}
@@ -93,7 +93,7 @@ const WhyWorkWithMe = () => {
           >
             I DON'T JUST
           </motion.span>
-          <motion.span 
+          <motion.span
             className="block text-[#1a1a1a] italic leading-[0.85] text-[clamp(52px,8.5vw,104px)] tracking-[-0.01em] mt-[-8px] relative z-10"
             style={{ fontFamily: 'Cormorant Garamond', fontWeight: 700 }}
             initial={{ opacity: 0, y: 30 }}
@@ -102,7 +102,7 @@ const WhyWorkWithMe = () => {
           >
             design screens.
           </motion.span>
-          <motion.span 
+          <motion.span
             className="block text-[#1a1a1a] uppercase leading-[0.85] text-[clamp(64px,10vw,124px)] mt-[-10px] relative z-10"
             style={{ fontFamily: 'Barlow Condensed', fontWeight: 900 }}
             initial={{ opacity: 0, y: 30 }}
@@ -111,7 +111,7 @@ const WhyWorkWithMe = () => {
           >
             I SOLVE
           </motion.span>
-          <motion.span 
+          <motion.span
             className="block text-[#e8432d] italic leading-[0.82] text-[clamp(72px,11.5vw,140px)] tracking-[-0.02em] mt-[-12px] relative z-10"
             style={{ fontFamily: 'Cormorant Garamond', fontWeight: 700 }}
             initial={{ opacity: 0, y: 30 }}
@@ -158,7 +158,7 @@ const WhyWorkWithMe = () => {
         </div>
 
         {/* CARDS SECTION */}
-        <motion.div 
+        <motion.div
           className="mt-[100px]"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -169,7 +169,7 @@ const WhyWorkWithMe = () => {
             const isLast = index === cards.length - 1;
 
             return (
-              <motion.div 
+              <motion.div
                 layout
                 key={card.id}
                 onClick={() => toggleCard(index)}
@@ -193,14 +193,14 @@ const WhyWorkWithMe = () => {
                           <span className="text-[#f0ede8]/25 text-[11px] font-mono mt-2" style={{ fontFamily: 'Space Mono' }}>
                             {card.id}
                           </span>
-                          <span 
+                          <span
                             className="text-[#f0ede8] uppercase leading-[0.9] tracking-[-0.02em] text-[clamp(40px,6vw,80px)]"
                             style={{ fontFamily: 'Barlow Condensed', fontWeight: 900 }}
                           >
                             {card.title}
                           </span>
                         </div>
-                        <div 
+                        <div
                           className="text-[#f0ede8]/30 text-[32px] font-light leading-[0.5] pb-[4px] cursor-pointer hover:text-[#f0ede8] transition-colors"
                           style={{ fontFamily: 'DM Sans' }}
                           onClick={(e) => { e.stopPropagation(); toggleCard(index); }}
@@ -221,13 +221,13 @@ const WhyWorkWithMe = () => {
                             exit={{ opacity: 0, y: 8 }}
                             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
                           >
-                            <p 
+                            <p
                               className="text-[#f0ede8]/80 text-[20px] md:text-[clamp(22px,2.8vw,32px)] leading-[1.65] max-w-[700px] not-italic font-normal"
                               style={{ fontFamily: 'Gebuk, sans-serif' }}
                             >
                               {card.body}
                             </p>
-                            <span 
+                            <span
                               className="inline-block text-[#e8432d] text-[18px] mt-[36px] -rotate-1"
                               style={{ fontFamily: 'Caveat', transform: 'rotate(-1.5deg)' }}
                             >
@@ -243,14 +243,14 @@ const WhyWorkWithMe = () => {
                         <span className="text-[#1a1a1a]/25 text-[11px] font-mono" style={{ fontFamily: 'Space Mono' }}>
                           {card.id}
                         </span>
-                        <span 
+                        <span
                           className="text-[#1a1a1a] uppercase leading-[1] tracking-[-0.02em] text-[clamp(28px,4.5vw,56px)] group-hover:text-[#e8432d] transition-colors duration-200"
                           style={{ fontFamily: 'Barlow Condensed', fontWeight: 900 }}
                         >
                           {card.title}
                         </span>
                       </div>
-                      <div 
+                      <div
                         className="text-[#1a1a1a]/30 text-[28px] transition-transform duration-300 group-hover:text-[#1a1a1a]/50"
                         style={{ fontFamily: 'DM Sans', transform: 'rotate(0deg)' }}
                       >
@@ -265,19 +265,19 @@ const WhyWorkWithMe = () => {
         </motion.div>
 
         {/* CLOSING LINE */}
-        <motion.div 
+        <motion.div
           className="mt-[72px] pt-[40px] border-t border-[#1a1a1a]/10 flex flex-col md:flex-row justify-between items-start md:items-end gap-[24px]"
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.4, delay: 0.2 }}
         >
-          <div 
+          <div
             className="text-[#1a1a1a]/55 italic text-[clamp(20px,2.5vw,30px)]"
             style={{ fontFamily: 'Cormorant Garamond', fontWeight: 700 }}
           >
             an artist's eye. an engineer's brain.
           </div>
-          <button 
+          <button
             onClick={handleCtaClick}
             className="w-full md:w-auto px-[30px] py-[13px] rounded-[100px] border-[1.5px] border-[#1a1a1a] bg-transparent text-[#1a1a1a] text-[14px] font-medium transition-all duration-250 ease-out hover:bg-[#e8432d] hover:border-[#e8432d] hover:text-[#f0ede8] text-center cursor-pointer"
             style={{ fontFamily: 'DM Sans' }}

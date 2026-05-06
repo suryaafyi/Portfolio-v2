@@ -22,6 +22,15 @@ const projects = [
     className: 'row-span-2'
   },
   {
+    id: 'upcoming',
+    title: 'cookin’ something interesting',
+    description: 'still in the lab 🧪',
+    tags: ['PRODUCT DESIGN', 'AI', 'IN PROGRESS'],
+    link: '#',
+    color: '#e8432d',
+    className: 'row-span-2'
+  },
+  {
     id: 'zendo',
     title: 'ZEN DO',
     description: 'A Mindful Productivity App | UI/UX Case Study',
@@ -31,24 +40,25 @@ const projects = [
     className: 'col-span-1'
   },
   {
-    id: 'more',
-    title: 'MORE SOON',
-    description: 'Working on something exciting...',
-    tags: ['Next Gen', '2026'],
-    link: '#',
-    color: '#666',
-    className: 'col-span-1 grayscale opacity-50'
+    id: 'waaah',
+    title: 'WAAAH',
+    description: 'AI That Speaks Baby | AI Product Design',
+    tags: ['AI Product', 'Web App', 'Research', 'Shipped'],
+    link: '/work/waaah',
+    color: '#FFB347',
+    className: 'col-span-1'
   }
 ];
 
 const CaseStudyCard = ({ project }: { project: typeof projects[0] }) => {
+  const isInProgress = project.tags.includes('IN PROGRESS');
   const isExternal = project.link.startsWith('http');
-  const Component = isExternal ? motion.a : motion(Link);
+  const Component = isExternal ? motion.a : isInProgress ? motion.div : motion(Link);
 
   return (
     <Component
-      {...(isExternal ? { href: project.link, target: '_blank', rel: 'noopener noreferrer' } : { to: project.link })}
-      data-cursor="view"
+      {...(isExternal ? { href: project.link, target: '_blank', rel: 'noopener noreferrer' } : !isInProgress ? { to: project.link } : {})}
+      data-cursor={isInProgress ? 'default' : 'view'}
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
@@ -66,7 +76,7 @@ const CaseStudyCard = ({ project }: { project: typeof projects[0] }) => {
           {project.tags.join(' · ')}
         </div>
         <h3 className="text-[clamp(1.6rem,3vw,2.5rem)] leading-[0.9] font-display text-text-primary group-hover:text-accent-red transition-colors lowercase tracking-tight">
-          {project.title}.
+          {project.title}{project.title.endsWith('.') ? '' : '.'}
         </h3>
         <p className="font-body text-sm text-text-primary/60 mt-2 max-w-[380px] leading-tight line-clamp-2">
           {project.description}
@@ -75,10 +85,10 @@ const CaseStudyCard = ({ project }: { project: typeof projects[0] }) => {
 
       <div className="relative z-10 mt-auto pt-4 flex justify-between items-center">
         <span className="font-body text-[10px] uppercase tracking-[0.2em] font-bold text-text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          View Case Study
+          {isInProgress ? 'Coming Soon' : 'View Case Study'}
         </span>
         <div className="flex-none w-10 h-10 rounded-full border border-black/10 flex items-center justify-center group-hover:bg-accent-red group-hover:border-accent-red group-hover:text-white transition-all duration-300">
-          ↗
+          {isInProgress ? '→' : '↗'}
         </div>
       </div>
     </Component>
@@ -143,7 +153,7 @@ const BentoGrid = () => {
             style={{ x }}
             className="flex gap-8 min-w-max pl-6 lg:pl-24 pr-6 lg:pr-24"
           >
-            <div className="grid grid-cols-3 grid-rows-2 gap-8 h-[65vh] min-w-[140vw]">
+            <div className="grid grid-cols-4 grid-rows-2 gap-8 h-[65vh] min-w-[160vw]">
               {projects.map((project) => (
                 <CaseStudyCard key={project.id} project={project} />
               ))}

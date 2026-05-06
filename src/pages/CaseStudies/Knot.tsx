@@ -33,7 +33,7 @@ export const KnotCaseStudy = () => {
         <MetadataBar
           role="UI/UX Designer (100%)"
           team="Solo Project"
-          timeline="2025"
+          timeline="4 weeks"
           skills="UX Research, Interaction Design, Visual Design, Usability Testing"
         />
       }
@@ -173,10 +173,10 @@ export const KnotCaseStudy = () => {
         <p>Knot taught me that emotional design isn't a nice-to-have — it's the entire product. The challenge wasn't building features; it was designing interactions that feel like care, not utility. The Family Graph discoverability issue was a reminder that even great features fail without proper onboarding and navigation clarity.</p>
       </SectionBlock>
 
-      <NextProjectFooter 
-        link="/work/zendo" 
-        title="Zen Do" 
-        behanceLink="https://www.behance.net/gallery/247113621/knot-Where-Moments-Became-Memories-UXUI-Case-study" 
+      <NextProjectFooter
+        link="/work/zendo"
+        title="Zen Do"
+        behanceLink="https://www.behance.net/gallery/247113621/knot-Where-Moments-Became-Memories-UXUI-Case-study"
       />
     </CaseStudyLayout>
   );

@@ -178,3 +178,33 @@ html.lenis {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Hide default cursor globally on desktop */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+  
+  /* Overrides for default pointer */
+  .allow-cursor, 
+  .allow-cursor *,
+  [data-cursor="default"],
+  [data-cursor="default"] * {
+    cursor: auto !important;
+  }
+
+  [data-cursor="grab"],
+  [data-cursor="grab"] * {
+    cursor: grab !important;
+  }
+
+  [data-cursor="grab"]:active,
+  [data-cursor="grab"]:active * {
+    cursor: grabbing !important;
+  }
+
+  [data-cursor="grabbing"],
+  [data-cursor="grabbing"] * {
+    cursor: grabbing !important;
+  }
+}

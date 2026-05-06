@@ -32,14 +32,18 @@ export const SidebarTOC = ({ sections }: { sections: TOCSection[] }) => {
 
   const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+    if ((window as any).lenis) {
+      (window as any).lenis.scrollTo(`#${id}`, { offset: -120 });
+    } else {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
   return (
-    <div className="hidden lg:block sticky top-24 w-64 flex-shrink-0">
+    <div className="w-full">
       <Link to="/" className="inline-flex items-center gap-2 font-mono text-sm tracking-widest uppercase mb-12 hover:text-accent-red transition-colors" data-cursor="view">
         <span className="text-lg leading-none">←</span> Work
       </Link>

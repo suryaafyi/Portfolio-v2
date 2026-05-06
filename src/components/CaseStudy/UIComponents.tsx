@@ -60,7 +60,7 @@ export const PersonaCard = ({ name, quote, background, goals, painPoints, needs 
   <div className="bg-text-primary text-bg-primary p-8 lg:p-10 rounded-3xl my-10">
     <h4 className="font-display text-2xl mb-2">{name}</h4>
     <p className="font-display italic text-xl text-accent-red mb-8">"{quote}"</p>
-    
+
     <div className="space-y-6">
       <div>
         <div className="font-mono text-[10px] uppercase tracking-widest text-bg-primary/50 mb-2">Background</div>
@@ -105,7 +105,7 @@ export const ImagePlaceholder = ({ color, caption, aspectRatio = 'aspect-[16/9]'
   </div>
 );
 
-export const NextProjectFooter = ({ link, title, behanceLink }: { link: string, title: string, behanceLink?: string }) => (
+export const NextProjectFooter = ({ link, title, behanceLink, behanceLabel = "View Full Case On Behance", ctaImage }: { link: string, title: string, behanceLink?: string, behanceLabel?: string, ctaImage?: string }) => (
   <div className="mt-32 pt-16 border-t border-text-primary/10 flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
     <div>
       <div className="font-mono text-[11px] uppercase tracking-widest text-accent-red mb-6">Next Project →</div>
@@ -116,15 +116,24 @@ export const NextProjectFooter = ({ link, title, behanceLink }: { link: string, 
       </a>
     </div>
     {behanceLink && (
-      <a 
-        href={behanceLink} 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className="font-mono text-xs uppercase tracking-widest text-text-primary/60 hover:text-accent-red transition-colors pb-2 md:pb-4 border-b border-transparent hover:border-accent-red"
-        data-cursor="view"
-      >
-        View Full Case On Behance ↗
-      </a>
+      <div className="flex flex-col items-center md:items-end gap-4">
+        {ctaImage && (
+          <img
+            src={ctaImage}
+            alt="CTA Illustration"
+            className="w-30 h-auto rounded-lg"
+          />
+        )}
+        <a
+          href={behanceLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-mono text-xs uppercase tracking-widest text-text-primary/60 hover:text-accent-red transition-colors pb-2 md:pb-4 border-b border-transparent hover:border-accent-red"
+          data-cursor="view"
+        >
+          {behanceLabel} ↗
+        </a>
+      </div>
     )}
   </div>
 );
@@ -145,7 +154,7 @@ export const BeforeAfterBlock = ({ beforeTitle, beforeContent, afterTitle, after
       </div>
       <div className="font-mono text-[11px] uppercase tracking-widest text-accent-red mb-4">{afterTitle}</div>
       <p className="font-body text-sm text-text-primary/80 leading-relaxed mb-6">{afterContent}</p>
-      
+
       <div className="border-t border-accent-red/20 pt-4">
         <div className="font-mono text-[10px] uppercase tracking-widest text-accent-red mb-2">Improvements</div>
         <p className="font-body text-sm italic text-text-primary/70">{improvements}</p>

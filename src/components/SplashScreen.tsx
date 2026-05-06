@@ -297,7 +297,7 @@ export default function SplashScreen({ onComplete, onRevealMain }: SplashScreenP
   return (
     <>
       {/* Background Layer (z-[100]) */}
-      <div className="fixed inset-0 z-[100] bg-[#020408] pointer-events-none overflow-hidden">
+      <div className="fixed inset-0 z-[100] bg-[#020408] pointer-events-auto overflow-hidden" data-cursor="default">
 
         {/* Cosmos Group (fades out at phase 6) */}
         <motion.div
@@ -347,6 +347,7 @@ export default function SplashScreen({ onComplete, onRevealMain }: SplashScreenP
           <div
             className="fixed inset-0 z-[200] flex items-end justify-center pb-[40px] cursor-pointer"
             onClick={handleEnter}
+            data-cursor="default"
           >
             <motion.div
               initial={{ opacity: 0.3 }}

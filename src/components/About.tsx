@@ -80,7 +80,8 @@ const About = () => {
             </div>
           </div>
           <div className="flex flex-col md:flex-row gap-20 pt-12 border-t border-black/5">
-            <Counter value={3} label="case studies shipped." />
+            <Counter value={4} label="case studies shipped." />
+            <Counter value={1} label="product shipped." />
             <div className="flex flex-col">
               <span className="text-6xl md:text-8xl font-display text-text-primary tracking-tighter font-bold">0</span>
               <span className="font-body text-[10px] uppercase tracking-widest text-text-primary font-bold mt-2 opacity-40">unrealistic specs.</span>
