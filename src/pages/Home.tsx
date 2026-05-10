@@ -7,6 +7,7 @@ import SocialProofBar from '../components/SocialProofBar';
 import BentoGrid from '../components/BentoGrid';
 import Writing from '../components/Writing';
 import HorizontalTicker from '../components/HorizontalTicker';
+import BuildsSection from '../components/BuildsSection';
 import Footer from '../components/Footer';
 
 interface HomeProps {
@@ -19,6 +20,7 @@ const Home: React.FC<HomeProps> = ({ splashDonePhase }) => {
       <Hero splashDonePhase={splashDonePhase} />
       <BentoGrid />
       <SocialProofBar />
+      <BuildsSection />
       <About />
       <HorizontalTicker />
       <Timeline />
