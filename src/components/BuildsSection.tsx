@@ -413,6 +413,53 @@ const BuildsSection = () => {
               </div>
             </div>
           </div>
+
+          {/* Thin divider */}
+          <div className="w-full h-px bg-black/10 mt-16 mb-12" />
+
+          {/* Testimonial Block */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col items-center text-center gap-4 px-6"
+          >
+            {/* Line 1 - quote mark */}
+            <div className="font-display italic text-[80px] leading-[0.8] text-[#e8432d] opacity-30">
+              "
+            </div>
+
+            {/* Line 2 - the quote */}
+            <div className="font-display italic text-2xl lg:text-3xl text-text-primary max-w-[600px]">
+              "finally live and it's actually clean af 🔥 big W"
+            </div>
+
+            {/* Line 3 - attribution row */}
+            <div className="flex items-center gap-3 justify-center flex-wrap">
+              <span className="font-body font-bold text-[14px] text-text-primary">
+                — Bharath
+              </span>
+              <div className="w-1 h-1 rounded-full bg-[#e8432d]" />
+              <span className="font-body text-[13px] text-text-primary/50">
+                Video Editor & Content Creator
+              </span>
+              <div className="w-1 h-1 rounded-full bg-black/20" />
+              <span className="font-mono text-[9px] uppercase tracking-widest border border-[#e8432d]/30 text-[#e8432d] px-3 py-1 rounded-full">
+                ✓ VERIFIED CLIENT
+              </span>
+            </div>
+
+            {/* Line 4 - client site link */}
+            <a 
+              href="https://bybharath.vercel.app" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="font-mono text-[10px] uppercase tracking-widest text-text-primary/30 hover:text-[#e8432d] transition-colors mt-2"
+            >
+              bybharath.vercel.app ↗
+            </a>
+          </motion.div>
         </div>
       </section>
 
